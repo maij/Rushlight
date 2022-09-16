@@ -4,6 +4,8 @@ from pygame.locals import *
 ACC = 0.5
 FRIC = -0.12
 
+tile_color = (150,110,30)
+
 Vec = pygame.math.Vector2  # 2 for two dimensional
 
 class Torch(pygame.sprite.Sprite):
@@ -58,14 +60,5 @@ class Tile(pygame.sprite.Sprite):
 
         self.rect = pattern.get_rect(center=(x,y))
         self.surf = pygame.Surface((self.rect.width, self.rect.height))
-        self.surf.fill((123,123,123))
-        self.surf.blit(pattern, (0, 0), special_flags=pygame.BLEND_RGBA_SUB)
-
-
-        #self.surf.fill((255, 255, 255))
-        #self.surf.blit(pattern, Vec(x, y))
-        #self.surf.fill((255, 255, 255))
-        #self.surf.fill((255, 255, 0))
- 
-        #self.surf = pygame.Surface((width, height))
-
+        self.surf.fill(tile_color)
+        self.surf.blit(pattern, pattern.get_rect())
