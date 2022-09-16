@@ -77,10 +77,12 @@ class Player(pygame.sprite.Sprite):
        #     self.pos.x = WIDTH
              
         self.rect.midbottom = self.pos
- 
-class platform(pygame.sprite.Sprite):
-    def __init__(self, x, y, width, height):
+
+class Tile(pygame.sprite.Sprite):
+    def __init__(self, x, y, width, height, pattern):
         super().__init__()
         self.surf = pygame.Surface((width, height))
-        self.surf.fill((255,0,0))
         self.rect = self.surf.get_rect(center = (x, y))
+        #self.surf.blit(pattern, Vec(x, y))
+        self.surf.fill((255, 255, 255))
+ 

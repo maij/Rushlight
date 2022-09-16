@@ -9,6 +9,12 @@ vec = pygame.math.Vector2  # 2 for two dimensional
 
 filter_on = False
 
+torch_colors = {
+    'r' : (255, 0, 0),
+    'g' : (0, 255, 0),
+    'b' : (0, 0, 255),
+}
+
 light = pygame.image.load('spotlight.png')
 
 #print(light.get_rect())
@@ -28,15 +34,14 @@ FPS = 60
 FramePerSec = pygame.time.Clock()
 
  
-PT1 = platform(WIDTH/2, HEIGHT-10, WIDTH, 20)
 P1 = Player()
 T = Torch()
+t = Tile(WIDTH/4, HEIGHT/4, WIDTH/12, WIDTH/12, light)
  
 displaysurface = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Game")
 
 all_sprites = pygame.sprite.Group()
-all_sprites.add(PT1)
 all_sprites.add(P1)
 all_sprites.add(T)
 
