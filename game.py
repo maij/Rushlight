@@ -7,7 +7,9 @@ from objects import *
 pygame.init()
 vec = pygame.math.Vector2  # 2 for two dimensional
 
-light=pygame.image.load('spotlight.png')
+filter_on = False
+
+light = pygame.image.load('spotlight.png')
 
 #print(light.get_rect())
 #print(light.get_rect().x)
@@ -39,7 +41,8 @@ all_sprites.add(P1)
 all_sprites.add(T)
 
 T.surf = pygame.transform.scale(T.surf, (100,100))
- 
+
+light_toggle = False 
 while True:
     for event in pygame.event.get():
         if event.type == QUIT:
@@ -49,15 +52,21 @@ while True:
     P1.move()
     T.move()
      
+    pressed_keys = pygame.key.get_pressed()
+    if pressed_keys[K_l] and not light_toggle:
+        filter_on = not filter_on
+    light_toggle = pressed_keys[K_l]
+
     displaysurface.fill((0,0,0))
     for entity in all_sprites:
         displaysurface.blit(entity.surf, entity.rect)
-    
-    filter = pygame.surface.Surface((HEIGHT, WIDTH))
-    filter.fill(pygame.color.Color('Grey'))
-    mouse_pos = pygame.mouse.get_pos()
-    filter.blit(light, vec(mouse_pos - vec(light.get_rect().width/2, light.get_rect().height/2)))
-    displaysurface.blit(filter, (0, 0), special_flags=pygame.BLEND_RGBA_SUB)
+
+    if filter_on:    
+        filter = pygame.surface.Surface((HEIGHT, WIDTH))
+        filter.fill(pygame.color.Color('Grey'))
+        mouse_pos = pygame.mouse.get_pos()
+        filter.blit(light, vec(mouse_pos - vec(light.get_rect().width/2, light.get_rect().height/2)))
+        displaysurface.blit(filter, (0, 0), special_flags=pygame.BLEND_RGBA_SUB)
  
  
 
